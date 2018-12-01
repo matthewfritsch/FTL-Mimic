@@ -4,26 +4,28 @@ public class ProjectileWeapon extends Weapon {
 
 	public ProjectileWeapon() {
 		this.ammo = 10;
-		this.cooldownRounds = 4;
+		this.cooldownActions = 4;
 		this.currentCooldown = 0;
 		this.damageProduced = 2;
 		this.damageTakenFromPlayer = 0;
 		this.isFunctional = true;
 		this.systemHealth = 2;
 		this.currentSysHealth = systemHealth;
-		this.roundsToFix = 3;
+		this.actionsToFix = 3;
+		this.sysName = "Standard Projectile Weapon";
 	}
 	
-	public ProjectileWeapon(int ammo, int cooldownRounds, int damageProduced, int selfDamage, boolean isFunc, int systemHealth, int roundsToFix) {
+	public ProjectileWeapon(int ammo, int cooldownActions, int damageProduced, int selfDamage, boolean isFunc, int systemHealth, int actionsToFix) {
 		this.ammo = ammo;
-		this.cooldownRounds = cooldownRounds;
+		this.cooldownActions = cooldownActions;
 		this.damageProduced = damageProduced;
 		this.currentCooldown = 0;
 		this.damageTakenFromPlayer = selfDamage;
 		this.isFunctional = isFunc;
 		this.systemHealth = systemHealth;
 		this.currentSysHealth = systemHealth;
-		this.roundsToFix = roundsToFix;
+		this.actionsToFix = actionsToFix;
+		this.sysName = "Standard Projectile Weapon";
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class ProjectileWeapon extends Weapon {
 		*/
 		if(this.ammo > 0 && this.isFunctional && this.isCoolingDown() == false) {
 			this.ammo--;
-			this.currentCooldown = this.cooldownRounds;
+			this.currentCooldown = this.cooldownActions;
 			return this.damageProduced;
 		}
 		return 0;

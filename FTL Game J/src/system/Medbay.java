@@ -17,11 +17,9 @@ public class Medbay extends Systems {
 	}
 
 	public boolean takeInMedbay(Pawn c) {
-		for (int x = 0; x < charInMedbay.length; x++) {
-			if (charInMedbay[x] == null) {
-				charInMedbay[x] = c;
-				return true;
-			}
+		if (c.getHealth() < c.getMaxHealth()) {
+			c.heal(healthProduction);
+			return true;
 		}
 		return false;
 	}
@@ -30,10 +28,10 @@ public class Medbay extends Systems {
 		String stat = "";
 		for (int x = 0; x < charInMedbay.length; x++) {
 			if (charInMedbay[x] == null) {
-				stat+= "<Empty Spot>\n";
-			}
-			else
-				stat+=("Pawn named " + charInMedbay[x].getName() + " is " + stability(charInMedbay[x]) + " at health " + charInMedbay[x].getHealth() + ".\n");
+				stat += "<Empty Spot>\n";
+			} else
+				stat += ("Pawn named " + charInMedbay[x].getName() + " is " + stability(charInMedbay[x]) + " at health "
+						+ charInMedbay[x].getHealth() + ".\n");
 
 		}
 		return stat;
@@ -49,31 +47,32 @@ public class Medbay extends Systems {
 		} else
 			return "critical";
 	}
-	
+
 	public void heal() {
-		for(Pawn p : charInMedbay) {
-			if(p != null) {
+		for (Pawn p : charInMedbay) {
+			if (p != null) {
 				p.heal(this.healthProduction);
 			}
 		}
 	}
 
 	@Override
-	public boolean waitRound() {
+	public boolean waitAction() {
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.err.println(
-				"Error! Produced a case of 'Medbay' calling 'waitRound' function. No actions to be performed.");
+		System.err
+				.println("Error! Produced a case of 'Medbay' calling 'waitTurn' function. No actions to be performed.");
 		Exception e = new Exception("Improper waitRound() action!");
 		e.printStackTrace();
 		return false;
 	}
-	
+
 	public String toString() {
-		return "Medbay at " + hashCode() + " with a production of " + healthProduction + " and with the following status:\n" + status();
+		return "Medbay at " + hashCode() + " with a production of " + healthProduction
+				+ " and with the following status:\n" + status();
 	}
 
 }

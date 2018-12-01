@@ -4,26 +4,28 @@ public class LaserWeapon extends Weapon {
 
 	public LaserWeapon() {
 		this.ammo = -1;
-		this.cooldownRounds = 3;
+		this.cooldownActions = 2;
 		this.currentCooldown = 0;
 		this.damageProduced = 1;
 		this.damageTakenFromPlayer = 0;
 		this.isFunctional = true;
 		this.systemHealth = 1;
 		this.currentSysHealth = systemHealth;
-		this.roundsToFix = 2;
+		this.actionsToFix = 2;
+		this.sysName = "Standard Laser Weapon";
 	}
 
-	public LaserWeapon(int cooldownRounds, int damageProduced, int selfDamage, boolean isFunc, int systemHealth, int roundsToFix) {
+	public LaserWeapon(int cooldownactions, int damageProduced, int selfDamage, boolean isFunc, int systemHealth, int actionsToFix) {
 		this.ammo = -1;
-		this.cooldownRounds = cooldownRounds;
+		this.cooldownActions = cooldownactions;
 		this.damageProduced = damageProduced;
 		this.currentCooldown = 0;
 		this.damageTakenFromPlayer = selfDamage;
 		this.isFunctional = isFunc;
 		this.systemHealth = systemHealth;
 		this.currentSysHealth = systemHealth;
-		this.roundsToFix = roundsToFix;
+		this.actionsToFix = actionsToFix;
+		this.sysName = "Standard Laser Weapon";
 	}
 	
 	@Override
@@ -32,7 +34,7 @@ public class LaserWeapon extends Weapon {
 		 *we will need to return damage all the time as soon as we set this thing to
 		 *cooldown*/
 		if (this.isFunctional && this.isCoolingDown() == false) {
-			this.currentCooldown = this.cooldownRounds;
+			this.currentCooldown = this.cooldownActions;
 			return this.damageProduced;
 		}
 		return 0;
